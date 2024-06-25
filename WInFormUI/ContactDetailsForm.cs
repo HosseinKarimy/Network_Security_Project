@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace WInFormUI
 {
-    public partial class LoginForm : Form
+    public partial class ContactDetailsForm : Form
     {
-        public LoginForm()
+        public ContactDetailsForm()
         {
             InitializeComponent();
         }

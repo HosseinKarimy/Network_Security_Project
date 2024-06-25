@@ -28,18 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
+            Panel_Main = new Panel();
             SuspendLayout();
+            // 
+            // Panel_Main
+            // 
+            Panel_Main.Location = new Point(12, 12);
+            Panel_Main.Name = "Panel_Main";
+            Panel_Main.Size = new Size(468, 467);
+            Panel_Main.TabIndex = 0;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(492, 491);
+            Controls.Add(Panel_Main);
             Name = "MainForm";
             Text = "MainForm";
+            Load += MainForm_Load;
             ResumeLayout(false);
         }
 
         #endregion
+
+        private Panel Panel_Main;
     }
 }

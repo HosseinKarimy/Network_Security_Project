@@ -30,8 +30,9 @@
         {
             Panel_Records = new Panel();
             Panel_Actions = new Panel();
-            Button_AddContact = new Button();
+            Button_EditContact = new Button();
             Button_DeleteContact = new Button();
+            Button_AddContact = new Button();
             Panel_Actions.SuspendLayout();
             SuspendLayout();
             // 
@@ -46,6 +47,7 @@
             // Panel_Actions
             // 
             Panel_Actions.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            Panel_Actions.Controls.Add(Button_EditContact);
             Panel_Actions.Controls.Add(Button_DeleteContact);
             Panel_Actions.Controls.Add(Button_AddContact);
             Panel_Actions.Location = new Point(12, 387);
@@ -53,23 +55,34 @@
             Panel_Actions.Size = new Size(337, 39);
             Panel_Actions.TabIndex = 1;
             // 
+            // Button_EditContact
+            // 
+            Button_EditContact.Location = new Point(224, 9);
+            Button_EditContact.Name = "Button_EditContact";
+            Button_EditContact.Size = new Size(100, 23);
+            Button_EditContact.TabIndex = 0;
+            Button_EditContact.Text = "Edit Contact";
+            Button_EditContact.UseVisualStyleBackColor = true;
+            Button_EditContact.Click += Button_DeleteContact_Click;
+            // 
+            // Button_DeleteContact
+            // 
+            Button_DeleteContact.Location = new Point(118, 9);
+            Button_DeleteContact.Name = "Button_DeleteContact";
+            Button_DeleteContact.Size = new Size(100, 23);
+            Button_DeleteContact.TabIndex = 0;
+            Button_DeleteContact.Text = "Delete Contact";
+            Button_DeleteContact.UseVisualStyleBackColor = true;
+            Button_DeleteContact.Click += Button_DeleteContact_Click;
+            // 
             // Button_AddContact
             // 
-            Button_AddContact.Location = new Point(3, 9);
+            Button_AddContact.Location = new Point(10, 9);
             Button_AddContact.Name = "Button_AddContact";
             Button_AddContact.Size = new Size(102, 23);
             Button_AddContact.TabIndex = 0;
             Button_AddContact.Text = "Add Contact";
             Button_AddContact.UseVisualStyleBackColor = true;
-            // 
-            // Button_DeleteContact
-            // 
-            Button_DeleteContact.Location = new Point(111, 9);
-            Button_DeleteContact.Name = "Button_DeleteContact";
-            Button_DeleteContact.Size = new Size(75, 23);
-            Button_DeleteContact.TabIndex = 0;
-            Button_DeleteContact.Text = "DeleteContact";
-            Button_DeleteContact.UseVisualStyleBackColor = true;
             // 
             // ShowDataForm
             // 
@@ -78,6 +91,7 @@
             ClientSize = new Size(361, 438);
             Controls.Add(Panel_Actions);
             Controls.Add(Panel_Records);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "ShowDataForm";
             Text = "ShowDataForm";
             Panel_Actions.ResumeLayout(false);
@@ -90,5 +104,6 @@
         private Panel Panel_Actions;
         private Button Button_DeleteContact;
         private Button Button_AddContact;
+        private Button Button_EditContact;
     }
 }

@@ -16,5 +16,10 @@ namespace WInFormUI
         {
             InitializeComponent();
         }
+
+        private void Button_DeleteContact_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
