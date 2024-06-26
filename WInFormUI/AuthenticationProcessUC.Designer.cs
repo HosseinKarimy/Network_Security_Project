@@ -76,12 +76,13 @@
             // 
             // Button_Confirm
             // 
-            Button_Confirm.Location = new Point(115, 107);
+            Button_Confirm.Location = new Point(124, 107);
             Button_Confirm.Name = "Button_Confirm";
             Button_Confirm.Size = new Size(75, 23);
             Button_Confirm.TabIndex = 7;
             Button_Confirm.Text = "button1";
             Button_Confirm.UseVisualStyleBackColor = true;
+            Button_Confirm.Click += Button_Confirm_Click;
             // 
             // TextBox_Password
             // 
