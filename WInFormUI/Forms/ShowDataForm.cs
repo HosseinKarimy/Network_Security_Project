@@ -33,18 +33,23 @@ namespace WInFormUI
 
         private void Button_AddContact_Click(object sender, EventArgs e)
         {
-            var newContact = new ContactDTO();
+            var newContact = new ContactModel
+            {
+                Name = TextBox_Name.Text,
+                Number = TextBox_Number.Text,
+                Owner = _user.Username,
+                Sign = TextBox_Name.Text + TextBox_Number.Text + _user.Username
+            };
 
-            ISecurityOperator contactOperator = new SecurityOperator();
-
-            newContact.Name = contactOperator.Encryptor(TextBox_Name.Text, _user.Password);
-            newContact.Number = contactOperator.Encryptor(TextBox_Number.Text, _user.Password);
-            newContact.Owner = contactOperator.Encryptor(_user.Username, _user.Password);
-            newContact.Sign = contactOperator.Sign(TextBox_Name.Text + TextBox_Number.Text , _user.Password);
-
-            IContactRepository contactRepo = new ContactRepository();
-            contactRepo.Add(newContact);
-
+            var contactDto = new ContactSecurityOperator().EncrypteContact(newContact, _user.Password);
+            try
+            {
+                new ContactRepository().Add(contactDto);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }            
         }
     }
 }
