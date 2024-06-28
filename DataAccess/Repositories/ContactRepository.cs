@@ -1,7 +1,9 @@
-﻿using Models.DTO;
+﻿using DataAccess.DBContext;
+using DataAccess.Repositories.IRepositories;
+using Models.DTO;
 using System.Data.SQLite;
 
-namespace DataAccess;
+namespace DataAccess.Repositories;
 
 public class ContactRepository : IContactRepository
 {

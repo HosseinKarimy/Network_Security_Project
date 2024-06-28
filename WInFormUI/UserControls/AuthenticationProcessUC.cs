@@ -1,6 +1,7 @@
 ﻿using DataAccess;
-using Models;
+using DataAccess.Repositories;
 using Models.DTO;
+using Models.Enums;
 using SecurityOperations;
 
 namespace WInFormUI

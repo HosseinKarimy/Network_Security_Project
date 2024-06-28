@@ -1,6 +1,6 @@
 ﻿using Models.DTO;
 
-namespace DataAccess;
+namespace DataAccess.Repositories.IRepositories;
 
 public interface IUserRepository : IRepository<UserDTO>
 {

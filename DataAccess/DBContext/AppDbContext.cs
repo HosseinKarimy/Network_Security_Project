@@ -1,6 +1,6 @@
 ﻿using System.Data.SQLite;
 
-namespace DataAccess;
+namespace DataAccess.DBContext;
 
 public class AppDbContext
 {
