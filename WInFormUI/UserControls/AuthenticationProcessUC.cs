@@ -2,7 +2,7 @@
 using Models.DTO;
 using Models.Enums;
 using Models.Models;
-using Operations.DominOperations;
+using Operations.DomainOperations;
 using Operations.SecurityOperations;
 
 namespace WInFormUI

@@ -4,7 +4,7 @@ using Models;
 using Models.DTO;
 using Models.Models;
 using Operations;
-using Operations.DominOperations;
+using Operations.DomainOperations;
 
 namespace WInFormUI
 {

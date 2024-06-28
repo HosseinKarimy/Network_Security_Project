@@ -1,6 +1,6 @@
 ﻿using Models.Models;
 
-namespace Operations.DominOperations;
+namespace Operations.DomainOperations;
 
 public interface IContactDomainOperator
 {

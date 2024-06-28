@@ -3,7 +3,7 @@ using Models.DTO;
 using Models.Models;
 using Operations.SecurityOperations;
 
-namespace Operations.DominOperations;
+namespace Operations.DomainOperations;
 
 public class ContactDomainOperator : IContactDomainOperator
 {

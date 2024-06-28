@@ -3,7 +3,7 @@ using DataAccess.Repositories.IRepositories;
 using Models.Models;
 using Operations.SecurityOperations;
 
-namespace Operations.DominOperations;
+namespace Operations.DomainOperations;
 
 public class UserDomainOperator : IUserDomainOperator
 {
