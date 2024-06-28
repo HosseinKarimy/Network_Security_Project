@@ -1,7 +1,7 @@
 ﻿using DataAccess;
 using Models;
 using Models.DTO;
-using SecurityOperator;
+using SecurityOperations;
 
 namespace WInFormUI
 {
@@ -76,8 +76,8 @@ namespace WInFormUI
 
                 var salt = GetRandomString(10);
 
-                IUserOperator userOP = new UserOperator();
-                var saltedHashedPassword = userOP.Hasher(inputUserDTO.Password, salt);
+                ISecurityOperator secOP = new SecurityOperator();
+                var saltedHashedPassword = secOP.Hasher(inputUserDTO.Password, salt);
 
                 inputUserDTO.Password = salt + saltedHashedPassword;
 
@@ -101,12 +101,12 @@ namespace WInFormUI
                     Password = TextBox_Password.Text
                 };
 
-                var inDbUser = new UserRepository().Get(inputUserDTO.Username);
+                var inDbUser = new UserRepository().GetByUsername(inputUserDTO.Username);
 
                 string salt = inDbUser.Password[..10];
                 string inDbHashedPassword = inDbUser.Password[10..];
 
-                IUserOperator userOP = new UserOperator();
+                ISecurityOperator userOP = new SecurityOperator();
                 var saltedHashedPassword = userOP.Hasher(inputUserDTO.Password, salt);
 
                 if (saltedHashedPassword == inDbHashedPassword)
