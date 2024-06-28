@@ -21,7 +21,7 @@ public class UserRepository : IUserRepository
         using SQLiteCommand cmd = new(connection);
         cmd.CommandText = "INSERT INTO " + _tableName + " (Username, Password) VALUES (@Username, @Password)";
         cmd.Parameters.AddWithValue("@Username", entity.Username);
-        cmd.Parameters.AddWithValue("@Password", entity.Password);
+        cmd.Parameters.AddWithValue("@Password", entity.HashedPassword);
 
         cmd.ExecuteNonQuery();
     }

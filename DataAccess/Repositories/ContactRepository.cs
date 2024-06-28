@@ -21,9 +21,9 @@ public class ContactRepository : IContactRepository
         connection.Open();
         using SQLiteCommand cmd = new(connection);
         cmd.CommandText = "INSERT INTO " + _tableName + " (Name, Number , Owner, Sign) VALUES (@Name, @Number , @Owner, @Sign)";
-        cmd.Parameters.AddWithValue("@Name", entity.Name);
-        cmd.Parameters.AddWithValue("@Number", entity.Number);
-        cmd.Parameters.AddWithValue("@Owner", entity.Owner);
+        cmd.Parameters.AddWithValue("@Name", entity.EncryptedName);
+        cmd.Parameters.AddWithValue("@Number", entity.EncryptedNumber);
+        cmd.Parameters.AddWithValue("@Owner", entity.EncryptedOwner);
         cmd.Parameters.AddWithValue("@Sign", entity.Sign);
 
         cmd.ExecuteNonQuery();
