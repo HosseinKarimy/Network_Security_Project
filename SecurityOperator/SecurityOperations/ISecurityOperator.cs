@@ -1,4 +1,4 @@
-﻿namespace SecurityOperations;
+﻿namespace Operations.SecurityOperations;
 
 public interface ISecurityOperator
 {

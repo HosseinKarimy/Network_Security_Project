@@ -3,17 +3,20 @@ using DataAccess.Repositories.IRepositories;
 using Models;
 using Models.DTO;
 using Models.Models;
-using SecurityOperations;
+using Operations;
+using Operations.DominOperations;
 
 namespace WInFormUI
 {
     public partial class ShowDataForm : Form
     {
-        private UserModel _user;
+        private readonly UserModel _user;
+        private readonly IContactDomainOperator _contactDomainOperator;
         public ShowDataForm(UserModel _user)
         {
             InitializeComponent();
             this._user = _user;
+            this._contactDomainOperator = new ContactDomainOperator();
         }
 
         private void Button_DeleteContact_Click(object sender, EventArgs e)
@@ -28,7 +31,9 @@ namespace WInFormUI
 
         private void LoadDataInList()
         {
-           // throw new NotImplementedException();
+            var contacts = _contactDomainOperator.GetAllContancts(_user.Username, _user.Password);
+            ListView_Contacts.Clear();
+            contacts.ForEach(contact => { ListView_Contacts.Items.Add($"{contact.Name} {contact.Number}"); });
         }
 
         private void Button_AddContact_Click(object sender, EventArgs e)
@@ -41,15 +46,7 @@ namespace WInFormUI
                 Sign = TextBox_Name.Text + TextBox_Number.Text + _user.Username
             };
 
-            var contactDto = new ContactSecurityOperator().EncrypteContact(newContact, _user.Password);
-            try
-            {
-                new ContactRepository().Add(contactDto);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }            
+            _contactDomainOperator.AddNewContact(newContact, _user.Password);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace SecurityOperations.Tests
+﻿using Operations.SecurityOperations;
+
+namespace Operations.Tests
 {
     [TestClass()]
     public class SecurityOpertatorTests

@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{8E4C9144-2F43-48F4-9C6B-43941880EAAC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecurityOperations", "SecurityOperator\SecurityOperations.csproj", "{90CD4312-D9DC-4736-8AA4-EEEC401E087B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Operations", "SecurityOperator\Operations.csproj", "{90CD4312-D9DC-4736-8AA4-EEEC401E087B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityOperatorTests", "SecurityOperatorTests\SecurityOperatorTests.csproj", "{DE90C006-9BF2-450A-B278-AA89F3FDDF4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecurityOperatorTests", "SecurityOperatorTests\SecurityOperatorTests.csproj", "{DE90C006-9BF2-450A-B278-AA89F3FDDF4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

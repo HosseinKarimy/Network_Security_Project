@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SecurityOperator\SecurityOperations.csproj" />
+    <ProjectReference Include="..\SecurityOperator\Operations.csproj" />
   </ItemGroup>
 
   <ItemGroup>

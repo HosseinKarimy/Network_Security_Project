@@ -1,10 +1,9 @@
-﻿using DataAccess;
-using DataAccess.Repositories;
-using Models;
+﻿using DataAccess.Repositories;
 using Models.DTO;
 using Models.Enums;
 using Models.Models;
-using SecurityOperations;
+using Operations.DominOperations;
+using Operations.SecurityOperations;
 
 namespace WInFormUI
 {
@@ -12,11 +11,13 @@ namespace WInFormUI
     {
         private AuthMode authMode = AuthMode.SignIn;
         private readonly EventHandler UserAuthenticated;
+        private readonly IUserDomainOperator _userDomainOperator;
 
         public AuthenticationProcessUC(EventHandler UserAuthenticated)
         {
             InitializeComponent();
             this.UserAuthenticated = UserAuthenticated;
+            this._userDomainOperator = new UserDomainOperator();
         }
 
         private void AuthenticationProcessUC_Load(object sender, EventArgs e)
@@ -68,30 +69,21 @@ namespace WInFormUI
 
         private void SignUpProcess()
         {
-            try
+            var inputUser = new UserModel()
             {
-                var inputUserDTO = new UserDTO()
-                {
-                    Username = TextBox_Username.Text,
-                    Password = TextBox_Password.Text
-                };
+                Username = TextBox_Username.Text,
+                Password = TextBox_Password.Text
+            };
 
+            var isAdded = _userDomainOperator.AddNewUser(inputUser);
 
-                var salt = GetRandomString(10);
-
-                ISecurityOperator secOP = new SecurityOperator();
-                var saltedHashedPassword = secOP.Hasher(inputUserDTO.Password, salt);
-
-                inputUserDTO.Password = salt + saltedHashedPassword;
-
-                new UserRepository().Add(inputUserDTO);
-                UserAuthenticated.Invoke(inputUserDTO, EventArgs.Empty);
-            }
-            catch (Exception ex)
+            if (isAdded)
             {
-                MessageBox.Show(ex.Message);
-            }
-            
+                UserAuthenticated.Invoke(inputUser, EventArgs.Empty);
+            } else
+            {
+                MessageBox.Show("Error while adding user");
+            }            
         }
 
         private void SignInProcess()
@@ -102,8 +94,7 @@ namespace WInFormUI
                 Password = TextBox_Password.Text
             };
 
-            var userOperator = new UserSecurityOperator();
-            var isvalid = userOperator.IsValidUser(inputUser);
+            var isvalid = _userDomainOperator.IsValidUser(inputUser);
 
             if (isvalid)
             {
@@ -112,18 +103,7 @@ namespace WInFormUI
             {
                 MessageBox.Show("Username or Password is Invalid");
             }
-        }
-
-
-        private static string GetRandomString(int length)
-        {
-            Random random = new();
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            string randomString = new(Enumerable.Repeat(chars, length)
-                .Select(s => s[random.Next(s.Length)]).ToArray());
-
-            return randomString;
-        }
+        }       
 
     }
 

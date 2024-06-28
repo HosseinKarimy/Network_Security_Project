@@ -58,7 +58,7 @@ public class UserRepository : IUserRepository
             {
                 ID = sqlite_datareader.GetInt32(0),
                 Username = sqlite_datareader.GetString(1),
-                Password = sqlite_datareader.GetString(2)
+                HashedPassword = sqlite_datareader.GetString(2)
             };
         }
 

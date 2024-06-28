@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             Panel_Records = new Panel();
+            ListView_Contacts = new ListView();
             Panel_Actions = new Panel();
             Button_EditContact = new Button();
             Button_DeleteContact = new Button();
@@ -38,6 +39,7 @@
             label2 = new Label();
             TextBox_Name = new TextBox();
             label1 = new Label();
+            Panel_Records.SuspendLayout();
             Panel_Actions.SuspendLayout();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -45,10 +47,21 @@
             // Panel_Records
             // 
             Panel_Records.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            Panel_Records.Controls.Add(ListView_Contacts);
             Panel_Records.Location = new Point(12, 12);
             Panel_Records.Name = "Panel_Records";
             Panel_Records.Size = new Size(337, 369);
             Panel_Records.TabIndex = 0;
+            // 
+            // ListView_Contacts
+            // 
+            ListView_Contacts.Dock = DockStyle.Fill;
+            ListView_Contacts.Location = new Point(0, 0);
+            ListView_Contacts.Name = "ListView_Contacts";
+            ListView_Contacts.Size = new Size(337, 369);
+            ListView_Contacts.TabIndex = 0;
+            ListView_Contacts.UseCompatibleStateImageBehavior = false;
+            ListView_Contacts.View = View.List;
             // 
             // Panel_Actions
             // 
@@ -149,6 +162,7 @@
             Name = "ShowDataForm";
             Text = "ShowDataForm";
             Load += ShowDataForm_Load;
+            Panel_Records.ResumeLayout(false);
             Panel_Actions.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
@@ -167,5 +181,6 @@
         private Label label2;
         private TextBox TextBox_Name;
         private Label label1;
+        private ListView ListView_Contacts;
     }
 }
