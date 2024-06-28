@@ -29,7 +29,17 @@ public class UserRepository : IUserRepository
         throw new NotImplementedException();
     }
 
-    public UserDTO? Get(string Username)
+    public List<UserDTO> GetAll()
+    {
+        throw new NotImplementedException();
+    }
+
+    public UserDTO GetById(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public UserDTO? GetByUsername(string Username)
     {
         using SQLiteConnection connection = new SQLiteConnection(_sqLiteConnection);
         connection.Open();
@@ -37,7 +47,7 @@ public class UserRepository : IUserRepository
         cmd.CommandText = $"SELECT ID, Username, Password FROM {_tableName} where Username like @Username";
         cmd.Parameters.AddWithValue("@Username", Username);
 
-        SQLiteDataReader sqlite_datareader = cmd.ExecuteReader();
+        using SQLiteDataReader sqlite_datareader = cmd.ExecuteReader();
         UserDTO? user = null;
 
         if (sqlite_datareader.Read())
@@ -48,7 +58,7 @@ public class UserRepository : IUserRepository
                 Username = sqlite_datareader.GetString(1),
                 Password = sqlite_datareader.GetString(2)
             };
-        }        
+        }
 
         return user;
     }
