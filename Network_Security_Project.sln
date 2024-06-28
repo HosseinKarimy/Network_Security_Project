@@ -5,7 +5,13 @@ VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WInFormUI", "WInFormUI\WInFormUI.csproj", "{42135581-38D7-42CB-95DB-4E82F242264F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{DFBA0BC9-64F0-45F1-B336-EF30F7DBF248}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{DFBA0BC9-64F0-45F1-B336-EF30F7DBF248}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{8E4C9144-2F43-48F4-9C6B-43941880EAAC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecurityOperations", "SecurityOperator\SecurityOperations.csproj", "{90CD4312-D9DC-4736-8AA4-EEEC401E087B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityOperatorTests", "SecurityOperatorTests\SecurityOperatorTests.csproj", "{DE90C006-9BF2-450A-B278-AA89F3FDDF4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{DFBA0BC9-64F0-45F1-B336-EF30F7DBF248}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFBA0BC9-64F0-45F1-B336-EF30F7DBF248}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFBA0BC9-64F0-45F1-B336-EF30F7DBF248}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E4C9144-2F43-48F4-9C6B-43941880EAAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E4C9144-2F43-48F4-9C6B-43941880EAAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E4C9144-2F43-48F4-9C6B-43941880EAAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E4C9144-2F43-48F4-9C6B-43941880EAAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90CD4312-D9DC-4736-8AA4-EEEC401E087B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90CD4312-D9DC-4736-8AA4-EEEC401E087B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90CD4312-D9DC-4736-8AA4-EEEC401E087B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90CD4312-D9DC-4736-8AA4-EEEC401E087B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE90C006-9BF2-450A-B278-AA89F3FDDF4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE90C006-9BF2-450A-B278-AA89F3FDDF4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE90C006-9BF2-450A-B278-AA89F3FDDF4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE90C006-9BF2-450A-B278-AA89F3FDDF4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

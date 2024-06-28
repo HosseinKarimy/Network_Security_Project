@@ -33,7 +33,13 @@
             Button_EditContact = new Button();
             Button_DeleteContact = new Button();
             Button_AddContact = new Button();
+            groupBox1 = new GroupBox();
+            TextBox_Number = new TextBox();
+            label2 = new Label();
+            TextBox_Name = new TextBox();
+            label1 = new Label();
             Panel_Actions.SuspendLayout();
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // Panel_Records
@@ -50,7 +56,7 @@
             Panel_Actions.Controls.Add(Button_EditContact);
             Panel_Actions.Controls.Add(Button_DeleteContact);
             Panel_Actions.Controls.Add(Button_AddContact);
-            Panel_Actions.Location = new Point(12, 387);
+            Panel_Actions.Location = new Point(12, 479);
             Panel_Actions.Name = "Panel_Actions";
             Panel_Actions.Size = new Size(337, 39);
             Panel_Actions.TabIndex = 1;
@@ -83,18 +89,69 @@
             Button_AddContact.TabIndex = 0;
             Button_AddContact.Text = "Add Contact";
             Button_AddContact.UseVisualStyleBackColor = true;
+            Button_AddContact.Click += Button_AddContact_Click;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            groupBox1.Controls.Add(TextBox_Number);
+            groupBox1.Controls.Add(label2);
+            groupBox1.Controls.Add(TextBox_Name);
+            groupBox1.Controls.Add(label1);
+            groupBox1.Location = new Point(12, 387);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(337, 82);
+            groupBox1.TabIndex = 2;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "groupBox1";
+            // 
+            // TextBox_Number
+            // 
+            TextBox_Number.Location = new Point(101, 45);
+            TextBox_Number.Name = "TextBox_Number";
+            TextBox_Number.Size = new Size(134, 23);
+            TextBox_Number.TabIndex = 1;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(20, 48);
+            label2.Name = "label2";
+            label2.Size = new Size(54, 15);
+            label2.TabIndex = 0;
+            label2.Text = "Number:";
+            // 
+            // TextBox_Name
+            // 
+            TextBox_Name.Location = new Point(101, 16);
+            TextBox_Name.Name = "TextBox_Name";
+            TextBox_Name.Size = new Size(134, 23);
+            TextBox_Name.TabIndex = 1;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(20, 19);
+            label1.Name = "label1";
+            label1.Size = new Size(42, 15);
+            label1.TabIndex = 0;
+            label1.Text = "Name:";
             // 
             // ShowDataForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(361, 438);
+            ClientSize = new Size(361, 530);
+            Controls.Add(groupBox1);
             Controls.Add(Panel_Actions);
             Controls.Add(Panel_Records);
             FormBorderStyle = FormBorderStyle.None;
             Name = "ShowDataForm";
             Text = "ShowDataForm";
+            Load += ShowDataForm_Load;
             Panel_Actions.ResumeLayout(false);
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -105,5 +162,10 @@
         private Button Button_DeleteContact;
         private Button Button_AddContact;
         private Button Button_EditContact;
+        private GroupBox groupBox1;
+        private TextBox TextBox_Number;
+        private Label label2;
+        private TextBox TextBox_Name;
+        private Label label1;
     }
 }
