@@ -44,6 +44,32 @@ public class ContactRepository : IContactRepository
         throw new NotImplementedException();
     }
 
+    public List<ContactDTO> GetByOwner(string owner)
+    {
+        using SQLiteConnection connection = new SQLiteConnection(_sqLiteConnection);
+        connection.Open();
+        using SQLiteCommand cmd = new(connection);
+        cmd.CommandText = $"SELECT * FROM {_tableName} where Owner like @Owner";
+        cmd.Parameters.AddWithValue("@Owner", owner);
+
+        using SQLiteDataReader sqlite_datareader = cmd.ExecuteReader();
+        List<ContactDTO> contactDTOs = [];
+
+        while (sqlite_datareader.Read())
+        {
+            contactDTOs.Add(new ContactDTO
+            {
+                ID = sqlite_datareader.GetInt32(0),
+                EncryptedName = sqlite_datareader.GetString(1),
+                EncryptedNumber = sqlite_datareader.GetString(2),
+                EncryptedOwner = sqlite_datareader.GetString(3),
+                Sign = sqlite_datareader.GetString(4),
+            });
+        }
+
+        return contactDTOs;
+    }
+
     public void Update(ContactDTO entity)
     {
         throw new NotImplementedException();
