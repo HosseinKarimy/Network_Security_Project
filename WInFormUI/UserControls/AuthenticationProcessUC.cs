@@ -1,7 +1,9 @@
 ﻿using DataAccess;
 using DataAccess.Repositories;
+using Models;
 using Models.DTO;
 using Models.Enums;
+using Models.Models;
 using SecurityOperations;
 
 namespace WInFormUI
@@ -94,34 +96,22 @@ namespace WInFormUI
 
         private void SignInProcess()
         {
-            try
+            var inputUser = new UserModel()
             {
-                var inputUserDTO = new UserDTO()
-                {
-                    Username = TextBox_Username.Text,
-                    Password = TextBox_Password.Text
-                };
+                Username = TextBox_Username.Text,
+                Password = TextBox_Password.Text
+            };
 
-                var inDbUser = new UserRepository().GetByUsername(inputUserDTO.Username);
+            var userOperator = new UserSecurityOperator();
+            var isvalid = userOperator.IsValidUser(inputUser);
 
-                string salt = inDbUser.Password[..10];
-                string inDbHashedPassword = inDbUser.Password[10..];
-
-                ISecurityOperator userOP = new SecurityOperator();
-                var saltedHashedPassword = userOP.Hasher(inputUserDTO.Password, salt);
-
-                if (saltedHashedPassword == inDbHashedPassword)
-                {
-                    UserAuthenticated.Invoke(inputUserDTO, EventArgs.Empty);
-                } else
-                    throw new Exception();
-            }
-            catch (Exception)
+            if (isvalid)
+            {
+                UserAuthenticated.Invoke(inputUser, EventArgs.Empty);
+            } else
             {
                 MessageBox.Show("Username or Password is Invalid");
             }
-            
-
         }
 
 

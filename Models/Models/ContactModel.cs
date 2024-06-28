@@ -1,13 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Models.Models;
+﻿namespace Models.Models;
 
 public class ContactModel
 {
-    [Key]
-    public string Id { get; set; }
-
-    public string EncryptedName { get; set; }
-    public string EncryptedNumber { get; set; }
+    public string ID { get; set; }
+    public string Name { get; set; }
+    public string Number { get; set; }
+    public string Owner { get; set; }
     public string Sign { get; set; }
 }

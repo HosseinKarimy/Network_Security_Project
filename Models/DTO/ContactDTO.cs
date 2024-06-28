@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Models.DTO;
+﻿namespace Models.DTO;
 
 public class ContactDTO
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public string Number { get; set; }
-    public string Owner { get; set; }
+    public int ID { get; set; }
+    public string EncryptedName { get; set; }
+    public string EncryptedNumber { get; set; }
+    public string EncryptedOwner { get; set; }
     public string Sign { get; set; }
 }

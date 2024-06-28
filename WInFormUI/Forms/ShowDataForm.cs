@@ -2,14 +2,15 @@
 using DataAccess.Repositories.IRepositories;
 using Models;
 using Models.DTO;
+using Models.Models;
 using SecurityOperations;
 
 namespace WInFormUI
 {
     public partial class ShowDataForm : Form
     {
-        private UserDTO _user;
-        public ShowDataForm(UserDTO _user)
+        private UserModel _user;
+        public ShowDataForm(UserModel _user)
         {
             InitializeComponent();
             this._user = _user;
