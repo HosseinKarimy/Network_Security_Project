@@ -17,7 +17,7 @@ namespace WInFormUI
             InitializeComponent();
             this._user = _user;
             this._contactDomainOperator = new ContactDomainOperator();
-        }        
+        }
 
         private void ShowDataForm_Load(object sender, EventArgs e)
         {
@@ -36,8 +36,7 @@ namespace WInFormUI
             {
                 Name = TextBox_Name.Text,
                 Number = TextBox_Number.Text,
-                Owner = _user.Username,
-                Sign = TextBox_Name.Text + TextBox_Number.Text + _user.Username
+                Owner = _user.Username
             };
 
             var resault = _contactDomainOperator.AddNewContact(newContact, _user.Password);
@@ -67,7 +66,6 @@ namespace WInFormUI
                 Name = TextBox_Name.Text,
                 Number = TextBox_Number.Text,
                 Owner = _user.Username,
-                Sign = TextBox_Name.Text + TextBox_Number.Text + _user.Username
             };
 
             var resault = _contactDomainOperator.EditContact(editedContact, _user.Password);
@@ -85,7 +83,7 @@ namespace WInFormUI
         {
             var selectedItem = ListView_Contacts.SelectedItems[0].Tag as ContactModel;
 
-            var resault = _contactDomainOperator.DeleteContact(selectedItem , _user.Password);
+            var resault = _contactDomainOperator.DeleteContact(selectedItem, _user.Password);
             if (resault)
             {
                 ClearForm();
@@ -107,10 +105,14 @@ namespace WInFormUI
         {
             var contacts = _contactDomainOperator.GetAllContancts(_user.Username, _user.Password);
             ListView_Contacts.Clear();
+            ListView_Contacts.View = View.Details;
+            ListView_Contacts.Columns.Add("Name");
+            ListView_Contacts.Columns.Add("Numer");
+            ListView_Contacts.Columns.Add("IsManipulated");
             contacts.ForEach(
                 contact =>
                 {
-                    var newItem = new ListViewItem() { Text = $"{contact.Name} {contact.Number}", Tag = contact };
+                    var newItem = new ListViewItem([contact.Name, contact.Number, contact.IsManipulated.ToString()]) { Tag = contact };
                     ListView_Contacts.Items.Add(newItem);
                 }
                 );
@@ -126,6 +128,6 @@ namespace WInFormUI
             TextBox_Name.Clear();
             TextBox_Number.Clear();
         }
-        
+
     }
 }

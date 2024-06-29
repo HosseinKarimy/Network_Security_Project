@@ -5,7 +5,7 @@ namespace Operations.SecurityOperations;
 
 public class SecurityOperator : ISecurityOperator
 {
-    public string Decryptor(string cypherText, string key)
+    public string? Decryptor(string cypherText, string key)
     {
         using Aes aesAlg = Aes.Create();
         var hashedKey = Hasher(key);
@@ -23,7 +23,15 @@ public class SecurityOperator : ISecurityOperator
         using MemoryStream msDecrypt = new MemoryStream(Convert.FromBase64String(cypherText));
         using CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read);
         using StreamReader srDecrypt = new StreamReader(csDecrypt);
-        return srDecrypt.ReadToEnd();
+        try
+        {
+            return srDecrypt.ReadToEnd();
+        }
+        catch (Exception)
+        {
+            return null;
+        }
+        
     }
 
     public string Encryptor(string plainText, string key)
