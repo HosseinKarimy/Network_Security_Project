@@ -106,9 +106,9 @@ namespace WInFormUI
             var contacts = _contactDomainOperator.GetAllContancts(_user.Username, _user.Password);
             ListView_Contacts.Clear();
             ListView_Contacts.View = View.Details;
-            ListView_Contacts.Columns.Add("Name");
-            ListView_Contacts.Columns.Add("Numer");
-            ListView_Contacts.Columns.Add("IsManipulated");
+            ListView_Contacts.Columns.Add("Name",100);
+            ListView_Contacts.Columns.Add("Numer", 100);
+            ListView_Contacts.Columns.Add("IsManipulated", 100);
             contacts.ForEach(
                 contact =>
                 {
