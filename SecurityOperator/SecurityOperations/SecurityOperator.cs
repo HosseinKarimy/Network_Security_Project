@@ -6,31 +6,31 @@ namespace Operations.SecurityOperations;
 public class SecurityOperator : ISecurityOperator
 {
     public string? Decryptor(string cypherText, string key)
-    {
-        using Aes aesAlg = Aes.Create();
-        var hashedKey = Hasher(key);
-        var expandedKey = Encoding.UTF8.GetBytes(hashedKey[..32]);
-        aesAlg.Key = expandedKey;
-
-        var cypherByte = Convert.FromBase64String(cypherText);
-        aesAlg.Mode = CipherMode.CBC;
-        aesAlg.IV = cypherByte[..16];
-     
-
-        ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
-
-        using MemoryStream msDecrypt = new MemoryStream(cypherByte[16..]);
-        using CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read);
-        using StreamReader srDecrypt = new StreamReader(csDecrypt);
+    {        
         try
         {
+            using Aes aesAlg = Aes.Create();
+            var hashedKey = Hasher(key);
+            var expandedKey = Encoding.UTF8.GetBytes(hashedKey[..32]);
+            aesAlg.Key = expandedKey;
+
+            var cypherByte = Convert.FromBase64String(cypherText);
+            aesAlg.Mode = CipherMode.CBC;
+            aesAlg.IV = cypherByte[..16];
+
+
+            ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
+
+            using MemoryStream msDecrypt = new MemoryStream(cypherByte[16..]);
+            using CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read);
+            using StreamReader srDecrypt = new StreamReader(csDecrypt);
             return srDecrypt.ReadToEnd();
         }
         catch (Exception)
         {
             return null;
         }
-        
+
     }
 
     public string Encryptor(string plainText, string key)
@@ -61,10 +61,20 @@ public class SecurityOperator : ISecurityOperator
         return BitConverter.ToString(hash).Replace("-", "").ToLower();
     }
 
+    public bool IsSameSign(string signedText, string checkText, string key)
+    {
+        var decryptedSignedText = Decryptor(signedText, key);
+
+        if (decryptedSignedText == Hasher(checkText))
+            return true;
+        return false;
+    }
+
     public string Sign(string text, string key)
     {
         return Encryptor(Hasher(text), key);
     }
 }
+
 
 

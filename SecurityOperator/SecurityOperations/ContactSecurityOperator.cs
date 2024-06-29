@@ -1,7 +1,5 @@
 ﻿using Models.DTO;
 using Models.Models;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Xml.Linq;
 
 namespace Operations.SecurityOperations;
 
@@ -23,7 +21,7 @@ public class ContactSecurityOperator : IContactSecurityOperator
             Name = Name,
             Number = Number,
             Owner = Owner,
-            IsManipulated = _secOp.Sign(Name + Number + Owner, key) != contact.Sign
+            IsManipulated = !_secOp.IsSameSign(contact.Sign , Name + Number + Owner , key)
         };
     }
 
