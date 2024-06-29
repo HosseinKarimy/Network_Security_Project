@@ -55,6 +55,12 @@ namespace WInFormUI
         {
             var selectedItem = ListView_Contacts.SelectedItems[0].Tag as ContactModel;
 
+            if (!ValidationForm())
+            {
+                MessageBox.Show("Name or Number Can't be empty.");
+                return;
+            }
+
             var editedContact = new ContactModel
             {
                 ID = selectedItem.ID,
