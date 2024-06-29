@@ -44,6 +44,7 @@ namespace WInFormUI
             if (resault)
             {
                 ClearForm();
+                LoadDataInList();
             } else
             {
                 MessageBox.Show("an error occured");
@@ -54,10 +55,20 @@ namespace WInFormUI
         {
             var selectedItem = ListView_Contacts.SelectedItems[0].Tag as ContactModel;
 
-            var resault = _contactDomainOperator.EditContact(selectedItem , _user.Password);
+            var editedContact = new ContactModel
+            {
+                ID = selectedItem.ID,
+                Name = TextBox_Name.Text,
+                Number = TextBox_Number.Text,
+                Owner = _user.Username,
+                Sign = TextBox_Name.Text + TextBox_Number.Text + _user.Username
+            };
+
+            var resault = _contactDomainOperator.EditContact(editedContact, _user.Password);
             if (resault)
             {
                 ClearForm();
+                LoadDataInList();
             } else
             {
                 MessageBox.Show("an error occured");
@@ -72,6 +83,7 @@ namespace WInFormUI
             if (resault)
             {
                 ClearForm();
+                LoadDataInList();
             } else
             {
                 MessageBox.Show("an error occured");

@@ -26,6 +26,7 @@ public class ContactSecurityOperator : IContactSecurityOperator
     {  
         return new ContactDTO()
         {
+            ID= contact.ID,
             EncryptedName = _secOp.Encryptor(contact.Name, key),
             EncryptedNumber = _secOp.Encryptor(contact.Number, key),
             EncryptedOwner = _secOp.Encryptor(contact.Owner, key),
