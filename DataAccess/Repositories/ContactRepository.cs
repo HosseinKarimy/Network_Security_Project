@@ -28,12 +28,7 @@ public class ContactRepository : IContactRepository
 
         cmd.ExecuteNonQuery();
     }
-
-    public void Delete(ContactDTO entity)
-    {
-        throw new NotImplementedException();
-    }
-
+    
     public List<ContactDTO> GetAll()
     {
         throw new NotImplementedException();
@@ -66,7 +61,29 @@ public class ContactRepository : IContactRepository
     }
 
     public void Update(ContactDTO entity)
-    {
-        throw new NotImplementedException();
+    {   
+        using SQLiteConnection connection = new SQLiteConnection(_sqLiteConnection);
+        connection.Open();
+        using SQLiteCommand cmd = new(connection);
+        cmd.CommandText = $"UPDATE {_tableName} SET Name = @Name, Number = @Number, Owner = @Owner, Sign = @Sign WHERE ID = @ID";
+        cmd.Parameters.AddWithValue("@Name", entity.EncryptedName);
+        cmd.Parameters.AddWithValue("@Number", entity.EncryptedNumber);
+        cmd.Parameters.AddWithValue("@Owner", entity.EncryptedOwner);
+        cmd.Parameters.AddWithValue("@Sign", entity.Sign);
+        cmd.Parameters.AddWithValue("@ID", entity.ID);
+
+        cmd.ExecuteNonQuery();
     }
+
+    public void Delete(ContactDTO entity)
+    {
+        using SQLiteConnection connection = new SQLiteConnection(_sqLiteConnection);
+        connection.Open();
+        using SQLiteCommand cmd = new(connection);
+        cmd.CommandText = $"DELETE FROM {_tableName} where ID like @ID";
+        cmd.Parameters.AddWithValue("@ID", entity.ID);
+
+        cmd.ExecuteNonQuery();
+    }
+
 }
