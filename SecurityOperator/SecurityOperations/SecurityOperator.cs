@@ -11,16 +11,15 @@ public class SecurityOperator : ISecurityOperator
         var hashedKey = Hasher(key);
         var expandedKey = Encoding.UTF8.GetBytes(hashedKey[..32]);
         aesAlg.Key = expandedKey;
-        aesAlg.Mode = CipherMode.CBC;
-        aesAlg.IV = expandedKey[..16];
 
-        //var realCypherText = cypherText[16..];
-        //var iv = Convert.FromBase64String(cypherText[..16]);
-        //aesAlg.IV = iv;
+        var cypherByte = Convert.FromBase64String(cypherText);
+        aesAlg.Mode = CipherMode.CBC;
+        aesAlg.IV = cypherByte[..16];
+     
 
         ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
 
-        using MemoryStream msDecrypt = new MemoryStream(Convert.FromBase64String(cypherText));
+        using MemoryStream msDecrypt = new MemoryStream(cypherByte[16..]);
         using CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read);
         using StreamReader srDecrypt = new StreamReader(csDecrypt);
         try
@@ -41,7 +40,7 @@ public class SecurityOperator : ISecurityOperator
         var expandedKey = Encoding.UTF8.GetBytes(hashedKey[..32]);
         aesAlg.Key = expandedKey;
         aesAlg.Mode = CipherMode.CBC;
-        aesAlg.IV = expandedKey[..16];
+        aesAlg.GenerateIV();
 
         ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
 
@@ -52,7 +51,7 @@ public class SecurityOperator : ISecurityOperator
             swEncrypt.Write(plainText);
         }
         byte[] encryptedBytes = msEncrypt.ToArray();
-        return Convert.ToBase64String(encryptedBytes);
+        return Convert.ToBase64String(aesAlg.IV.Concat(encryptedBytes).ToArray());
     }
 
     public string Hasher(string input, string salt = "")

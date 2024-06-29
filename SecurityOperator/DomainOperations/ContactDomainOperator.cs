@@ -63,9 +63,8 @@ public class ContactDomainOperator : IContactDomainOperator
 
     public List<ContactModel> GetAllContancts(string username, string key)
     {
-        var contactRepo = new ContactRepository();
         var encryptedUsername = _secOp.Encryptor(username, key);
-        List<ContactDTO> contactDTOs = contactRepo.GetByOwner(encryptedUsername);
+        List<ContactDTO> contactDTOs = _contactRepo.GetByOwner(encryptedUsername);
 
         List<ContactModel> contacts = [];
         contactDTOs.ForEach(contactDTO => { contacts.Add(_contactSecOp.DecrypteContact(contactDTO, key)); });
