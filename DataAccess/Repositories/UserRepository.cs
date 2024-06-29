@@ -36,11 +36,6 @@ public class UserRepository : IUserRepository
         throw new NotImplementedException();
     }
 
-    public UserDTO GetById(int id)
-    {
-        throw new NotImplementedException();
-    }
-
     public UserDTO? GetByUsername(string Username)
     {
         using SQLiteConnection connection = new SQLiteConnection(_sqLiteConnection);

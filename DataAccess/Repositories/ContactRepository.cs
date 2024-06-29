@@ -39,11 +39,6 @@ public class ContactRepository : IContactRepository
         throw new NotImplementedException();
     }
 
-    public ContactDTO GetById(int id)
-    {
-        throw new NotImplementedException();
-    }
-
     public List<ContactDTO> GetByOwner(string owner)
     {
         using SQLiteConnection connection = new SQLiteConnection(_sqLiteConnection);
