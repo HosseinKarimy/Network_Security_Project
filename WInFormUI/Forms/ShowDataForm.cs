@@ -17,27 +17,21 @@ namespace WInFormUI
             InitializeComponent();
             this._user = _user;
             this._contactDomainOperator = new ContactDomainOperator();
-        }
-
-        private void Button_DeleteContact_Click(object sender, EventArgs e)
-        {
-
-        }
+        }        
 
         private void ShowDataForm_Load(object sender, EventArgs e)
         {
             LoadDataInList();
         }
 
-        private void LoadDataInList()
-        {
-            var contacts = _contactDomainOperator.GetAllContancts(_user.Username, _user.Password);
-            ListView_Contacts.Clear();
-            contacts.ForEach(contact => { ListView_Contacts.Items.Add($"{contact.Name} {contact.Number}"); });
-        }
-
         private void Button_AddContact_Click(object sender, EventArgs e)
         {
+            if (!ValidationForm())
+            {
+                MessageBox.Show("Name or Number Can't be empty.");
+                return;
+            }
+
             var newContact = new ContactModel
             {
                 Name = TextBox_Name.Text,
@@ -46,7 +40,74 @@ namespace WInFormUI
                 Sign = TextBox_Name.Text + TextBox_Number.Text + _user.Username
             };
 
-            _contactDomainOperator.AddNewContact(newContact, _user.Password);
+            var resault = _contactDomainOperator.AddNewContact(newContact, _user.Password);
+            if (resault)
+            {
+                ClearForm();
+            } else
+            {
+                MessageBox.Show("an error occured");
+            }
         }
+
+        private void Button_EditContact_Click(object sender, EventArgs e)
+        {
+            var selectedItem = ListView_Contacts.SelectedItems[0].Tag as ContactModel;
+
+            var resault = _contactDomainOperator.EditContact(selectedItem , _user.Password);
+            if (resault)
+            {
+                ClearForm();
+            } else
+            {
+                MessageBox.Show("an error occured");
+            }
+        }
+
+        private void Button_DeleteContact_Click(object sender, EventArgs e)
+        {
+            var selectedItem = ListView_Contacts.SelectedItems[0].Tag as ContactModel;
+
+            var resault = _contactDomainOperator.DeleteContact(selectedItem , _user.Password);
+            if (resault)
+            {
+                ClearForm();
+            } else
+            {
+                MessageBox.Show("an error occured");
+            }
+        }
+
+        private void ListView_Contacts_ItemActivate(object sender, EventArgs e)
+        {
+            var selectedItem = ListView_Contacts.SelectedItems[0].Tag as ContactModel;
+            TextBox_Name.Text = selectedItem!.Name;
+            TextBox_Number.Text = selectedItem!.Number;
+        }
+
+        private void LoadDataInList()
+        {
+            var contacts = _contactDomainOperator.GetAllContancts(_user.Username, _user.Password);
+            ListView_Contacts.Clear();
+            contacts.ForEach(
+                contact =>
+                {
+                    var newItem = new ListViewItem() { Text = $"{contact.Name} {contact.Number}", Tag = contact };
+                    ListView_Contacts.Items.Add(newItem);
+                }
+                );
+        }
+
+        private bool ValidationForm()
+        {
+            return !string.IsNullOrEmpty(TextBox_Name.Text) && !string.IsNullOrEmpty(TextBox_Name.Text);
+        }
+
+        private void ClearForm()
+        {
+            TextBox_Name.Clear();
+            TextBox_Number.Clear();
+        }
+        
     }
 }

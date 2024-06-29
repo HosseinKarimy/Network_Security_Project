@@ -33,16 +33,17 @@
             // 
             // Panel_Main
             // 
+            Panel_Main.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             Panel_Main.Location = new Point(12, 12);
             Panel_Main.Name = "Panel_Main";
-            Panel_Main.Size = new Size(468, 467);
+            Panel_Main.Size = new Size(322, 467);
             Panel_Main.TabIndex = 0;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(492, 491);
+            ClientSize = new Size(346, 491);
             Controls.Add(Panel_Main);
             Name = "MainForm";
             Text = "MainForm";

@@ -14,6 +14,7 @@ public class ContactDomainOperator : IContactDomainOperator
         _secOp = new SecurityOperator();
         _contactSecOp = new ContactSecurityOperator();
     }
+
     public bool AddNewContact(ContactModel contact, string key)
     {
         var contactDto = _contactSecOp.EncrypteContact(contact, key);
