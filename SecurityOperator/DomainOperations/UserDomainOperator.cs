@@ -40,7 +40,10 @@ public class UserDomainOperator : IUserDomainOperator
             var inputedUser = _userSecOp.HashUser(user, inDbUser.HashedPassword[..10]);
 
             if (inDbUser.HashedPassword == inputedUser.HashedPassword)
+            {
+                user.ID = inDbUser.ID;
                 return true;
+            }
             return false;
         }
         catch (Exception)
