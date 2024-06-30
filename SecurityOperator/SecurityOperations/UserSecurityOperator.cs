@@ -18,6 +18,7 @@ public class UserSecurityOperator : IUserSecurityOperator
         string hashedPassword = _secOp.Hasher(user.Password, salt);
         return new UserDTO
         {
+            ID = user.ID,
             Username = user.Username,
             HashedPassword = salt + hashedPassword
         };

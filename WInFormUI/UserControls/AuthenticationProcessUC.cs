@@ -1,9 +1,6 @@
-﻿using DataAccess.Repositories;
-using Models.DTO;
-using Models.Enums;
+﻿using Models.Enums;
 using Models.Models;
 using Operations.DomainOperations;
-using Operations.SecurityOperations;
 
 namespace WInFormUI
 {
@@ -38,14 +35,14 @@ namespace WInFormUI
 
         private void ChangeToSignInMode()
         {
-            Label_Title.Text = "Sign In";
+            Label_Title.Text = "Sign In Form";
             LinkedLabel_ChangeMode.Text = "or try Sign Up";
             Button_Confirm.Text = "Sign In";
         }
 
         private void ChangeToSignUpMode()
         {
-            Label_Title.Text = "Sign Up";
+            Label_Title.Text = "Sign Up Form";
             LinkedLabel_ChangeMode.Text = "or try Sign In";
             Button_Confirm.Text = "Sign Up";
         }
@@ -79,7 +76,7 @@ namespace WInFormUI
 
             if (isAdded)
             {
-                UserAuthenticated.Invoke(inputUser, EventArgs.Empty);
+                MessageBox.Show("User Added Successfully");
             } else
             {
                 MessageBox.Show("Error while adding user");
