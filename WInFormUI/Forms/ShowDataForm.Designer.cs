@@ -56,6 +56,7 @@
             // ListView_Contacts
             // 
             ListView_Contacts.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ListView_Contacts.FullRowSelect = true;
             ListView_Contacts.Location = new Point(0, 0);
             ListView_Contacts.Name = "ListView_Contacts";
             ListView_Contacts.Size = new Size(336, 388);
@@ -78,6 +79,7 @@
             // Button_EditContact
             // 
             Button_EditContact.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            Button_EditContact.Enabled = false;
             Button_EditContact.Location = new Point(223, 9);
             Button_EditContact.Name = "Button_EditContact";
             Button_EditContact.Size = new Size(100, 23);
@@ -89,6 +91,7 @@
             // Button_DeleteContact
             // 
             Button_DeleteContact.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            Button_DeleteContact.Enabled = false;
             Button_DeleteContact.Location = new Point(118, 9);
             Button_DeleteContact.Name = "Button_DeleteContact";
             Button_DeleteContact.Size = new Size(99, 23);

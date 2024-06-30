@@ -52,7 +52,13 @@ namespace WInFormUI
 
         private void Button_EditContact_Click(object sender, EventArgs e)
         {
-            var selectedItem = ListView_Contacts.SelectedItems[0].Tag as ContactModel;
+            if (ListView_Contacts.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Please select one contact to show details");
+                return;
+            }
+
+            ContactModel? selectedItem = ListView_Contacts.SelectedItems[0].Tag as ContactModel;
 
             if (!ValidationForm())
             {
@@ -96,6 +102,8 @@ namespace WInFormUI
 
         private void ListView_Contacts_ItemActivate(object sender, EventArgs e)
         {
+            Button_EditContact.Enabled = true;
+            Button_DeleteContact.Enabled = true;
             var selectedItem = ListView_Contacts.SelectedItems[0].Tag as ContactModel;
             TextBox_Name.Text = selectedItem!.Name;
             TextBox_Number.Text = selectedItem!.Number;
@@ -106,7 +114,7 @@ namespace WInFormUI
             var contacts = _contactDomainOperator.GetAllContancts(_user.Username, _user.Password);
             ListView_Contacts.Clear();
             ListView_Contacts.View = View.Details;
-            ListView_Contacts.Columns.Add("Name",100);
+            ListView_Contacts.Columns.Add("Name", 100);
             ListView_Contacts.Columns.Add("Numer", 100);
             ListView_Contacts.Columns.Add("IsManipulated", 100);
             contacts.ForEach(
@@ -127,7 +135,15 @@ namespace WInFormUI
         {
             TextBox_Name.Clear();
             TextBox_Number.Clear();
+            Button_EditContact.Enabled = false;
+            Button_DeleteContact.Enabled = false;
         }
 
+        private void ListView_Contacts_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            var selectedItem = ListView_Contacts.SelectedItems[0]?.Tag as ContactModel;
+            TextBox_Name.Text = selectedItem?.Name;
+            TextBox_Number.Text = selectedItem?.Number;
+        }
     }
 }
