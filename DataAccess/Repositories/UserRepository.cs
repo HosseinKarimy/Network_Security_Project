@@ -62,6 +62,13 @@ public class UserRepository : IUserRepository
 
     public void Update(UserDTO entity)
     {
-        throw new NotImplementedException();
+        using SQLiteConnection connection = new SQLiteConnection(_sqLiteConnection);
+        connection.Open();
+        using SQLiteCommand cmd = new(connection);
+        cmd.CommandText = $"UPDATE {_tableName} SET Password = @password WHERE ID = @ID";
+        cmd.Parameters.AddWithValue("@password", entity.HashedPassword);
+        cmd.Parameters.AddWithValue("@ID", entity.ID);
+
+        cmd.ExecuteNonQuery();
     }
 }

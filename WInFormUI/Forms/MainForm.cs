@@ -1,4 +1,6 @@
 using Models.Models;
+using Operations.DomainOperations;
+using WInFormUI.Forms;
 
 namespace WInFormUI;
 
@@ -50,5 +52,14 @@ public partial class MainForm : Form
         Panel_Main.Controls.Add(showDataForm);
         showDataForm.Show();
     }
-    
+
+    private void LinkLabel_ChangePassword_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+    {
+        var updateUserForm = new UpdateUserForm(_user);
+        var result = updateUserForm.ShowDialog();
+        if (result == DialogResult.OK)
+        {
+            MessageBox.Show("Password Changed");
+        }
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using DataAccess.Repositories;
 using DataAccess.Repositories.IRepositories;
+using Models.DTO;
 using Models.Models;
 using Operations.SecurityOperations;
 
@@ -9,10 +10,12 @@ public class UserDomainOperator : IUserDomainOperator
 {
     private readonly IUserSecurityOperator _userSecOp;
     private readonly IUserRepository _userRepo;
+    private readonly IContactDomainOperator _contactDomainOP;
     public UserDomainOperator()
     {
         _userSecOp = new UserSecurityOperator();
         _userRepo = new UserRepository();
+        _contactDomainOP = new ContactDomainOperator();
     }
 
     public bool AddNewUser(UserModel user)
@@ -54,5 +57,22 @@ public class UserDomainOperator : IUserDomainOperator
             .Select(s => s[random.Next(s.Length)]).ToArray());
 
         return randomString;
+    }
+
+    public bool ChangeUserPassword(UserModel user, string newPassword)
+    {
+        var oldPassword = user.Password;
+        user.Password = newPassword;
+        try
+        {
+            _userRepo.Update(_userSecOp.HashUser(user, GetRandomString(10)));
+            _contactDomainOP.UpdateAllContactAfterUpdateKey(user.Username,oldPassword,newPassword);
+            //TODO - what happen if User get Updated but Contacts dont Updated!???
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
     }
 }

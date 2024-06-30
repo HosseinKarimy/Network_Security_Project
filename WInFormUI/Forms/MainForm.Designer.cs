@@ -70,6 +70,7 @@
             LinkLabel_ChangePassword.TabStop = true;
             LinkLabel_ChangePassword.Text = "Change Password";
             LinkLabel_ChangePassword.Visible = false;
+            LinkLabel_ChangePassword.LinkClicked += LinkLabel_ChangePassword_LinkClicked;
             // 
             // Button_LogOut
             // 

@@ -68,4 +68,10 @@ public class ContactDomainOperator : IContactDomainOperator
         allContactDTOs.ForEach(contactDTO => { AllContacts.Add(_contactSecOp.DecrypteContact(contactDTO, key)); });
         return AllContacts.Where(contact => contact.Owner == username).ToList();
     }
+
+    public void UpdateAllContactAfterUpdateKey(string username, string oldKey, string key)
+    {
+        var allcontacts = GetAllContancts(username, oldKey);
+        allcontacts.ForEach(contactModel => { EditContact(contactModel, key); });
+    }
 }
