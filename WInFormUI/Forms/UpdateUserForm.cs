@@ -12,6 +12,8 @@ public partial class UpdateUserForm : Form
         InitializeComponent();
         _userDomainOP = new UserDomainOperator();
         _user = user;
+        TextBox_Username.Text = _user.Username;
+        TextBox_Username.ReadOnly = true;
     }
 
     private void Button_Save_Click(object sender, EventArgs e)
