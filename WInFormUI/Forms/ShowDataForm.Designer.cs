@@ -83,7 +83,7 @@
             Button_EditContact.Location = new Point(223, 9);
             Button_EditContact.Name = "Button_EditContact";
             Button_EditContact.Size = new Size(100, 23);
-            Button_EditContact.TabIndex = 0;
+            Button_EditContact.TabIndex = 2;
             Button_EditContact.Text = "Edit Contact";
             Button_EditContact.UseVisualStyleBackColor = true;
             Button_EditContact.Click += Button_EditContact_Click;
@@ -95,7 +95,7 @@
             Button_DeleteContact.Location = new Point(118, 9);
             Button_DeleteContact.Name = "Button_DeleteContact";
             Button_DeleteContact.Size = new Size(99, 23);
-            Button_DeleteContact.TabIndex = 0;
+            Button_DeleteContact.TabIndex = 1;
             Button_DeleteContact.Text = "Delete Contact";
             Button_DeleteContact.UseVisualStyleBackColor = true;
             Button_DeleteContact.Click += Button_DeleteContact_Click;
@@ -147,7 +147,7 @@
             TextBox_Name.Location = new Point(101, 16);
             TextBox_Name.Name = "TextBox_Name";
             TextBox_Name.Size = new Size(162, 23);
-            TextBox_Name.TabIndex = 1;
+            TextBox_Name.TabIndex = 0;
             // 
             // label1
             // 

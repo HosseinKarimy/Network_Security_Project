@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            label1 = new Label();
-            TextBox_Username = new TextBox();
-            label2 = new Label();
+            Button_Save = new Button();
+            TextBox_NewPassword = new TextBox();
             TextBox_OldPassword = new TextBox();
             label3 = new Label();
-            TextBox_NewPassword = new TextBox();
-            Button_Save = new Button();
+            label2 = new Label();
+            TextBox_Username = new TextBox();
+            label1 = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -55,30 +55,23 @@
             panel1.Size = new Size(274, 128);
             panel1.TabIndex = 0;
             // 
-            // label1
+            // Button_Save
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(3, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(63, 15);
-            label1.TabIndex = 0;
-            label1.Text = "Username:";
+            Button_Save.Location = new Point(98, 96);
+            Button_Save.Name = "Button_Save";
+            Button_Save.Size = new Size(75, 23);
+            Button_Save.TabIndex = 3;
+            Button_Save.Text = "Save";
+            Button_Save.UseVisualStyleBackColor = true;
+            Button_Save.Click += Button_Save_Click;
             // 
-            // TextBox_Username
+            // TextBox_NewPassword
             // 
-            TextBox_Username.Location = new Point(98, 6);
-            TextBox_Username.Name = "TextBox_Username";
-            TextBox_Username.Size = new Size(169, 23);
-            TextBox_Username.TabIndex = 1;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(3, 38);
-            label2.Name = "label2";
-            label2.Size = new Size(79, 15);
-            label2.TabIndex = 0;
-            label2.Text = "OldPassword:";
+            TextBox_NewPassword.Location = new Point(98, 67);
+            TextBox_NewPassword.Name = "TextBox_NewPassword";
+            TextBox_NewPassword.PasswordChar = '*';
+            TextBox_NewPassword.Size = new Size(169, 23);
+            TextBox_NewPassword.TabIndex = 2;
             // 
             // TextBox_OldPassword
             // 
@@ -97,23 +90,30 @@
             label3.TabIndex = 0;
             label3.Text = "NewPassword:";
             // 
-            // TextBox_NewPassword
+            // label2
             // 
-            TextBox_NewPassword.Location = new Point(98, 67);
-            TextBox_NewPassword.Name = "TextBox_NewPassword";
-            TextBox_NewPassword.PasswordChar = '*';
-            TextBox_NewPassword.Size = new Size(169, 23);
-            TextBox_NewPassword.TabIndex = 1;
+            label2.AutoSize = true;
+            label2.Location = new Point(3, 38);
+            label2.Name = "label2";
+            label2.Size = new Size(79, 15);
+            label2.TabIndex = 0;
+            label2.Text = "OldPassword:";
             // 
-            // Button_Save
+            // TextBox_Username
             // 
-            Button_Save.Location = new Point(98, 96);
-            Button_Save.Name = "Button_Save";
-            Button_Save.Size = new Size(75, 23);
-            Button_Save.TabIndex = 2;
-            Button_Save.Text = "Save";
-            Button_Save.UseVisualStyleBackColor = true;
-            Button_Save.Click += Button_Save_Click;
+            TextBox_Username.Location = new Point(98, 6);
+            TextBox_Username.Name = "TextBox_Username";
+            TextBox_Username.Size = new Size(169, 23);
+            TextBox_Username.TabIndex = 0;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(3, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(63, 15);
+            label1.TabIndex = 0;
+            label1.Text = "Username:";
             // 
             // UpdateUserForm
             // 
