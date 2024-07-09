@@ -18,9 +18,9 @@ public partial class UpdateUserForm : Form
 
     private void Button_Save_Click(object sender, EventArgs e)
     {
-        var isVallid = _userDomainOP.IsValidUser(new UserModel() { Username = _user.Username, Password = TextBox_OldPassword.Text });
+        var user = _userDomainOP.UserValidator(new UserModel() { Username = _user.Username, Password = TextBox_OldPassword.Text });
 
-        if (!isVallid)
+        if (user is null)
         {
             MessageBox.Show("OldPassword Isn't Correct");
             return;

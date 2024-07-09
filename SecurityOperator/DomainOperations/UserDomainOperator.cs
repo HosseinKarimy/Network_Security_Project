@@ -18,7 +18,7 @@ public class UserDomainOperator : IUserDomainOperator
     }
 
     public bool AddNewUser(UserModel user)
-    {   
+    {
         user.Key = GetRandomString(10);
         var userDTO = _userSecOp.HashAndEncryptUser(user, GetRandomString(10), user.Username + user.Password);
         try
@@ -29,12 +29,12 @@ public class UserDomainOperator : IUserDomainOperator
         catch (Exception)
         {
             return false;
-        }              
+        }
     }
 
     public UserModel? UserValidator(UserModel user)
-        {
-            var inDbUser = _userRepo.GetByUsername(user.Username);
+    {
+        var inDbUser = _userRepo.GetByUsername(user.Username);
         if (inDbUser == null)
             return null;
         return _userSecOp.ValidateUser(user, inDbUser , user.Username + user.Password);
@@ -52,13 +52,10 @@ public class UserDomainOperator : IUserDomainOperator
 
     public bool ChangeUserPassword(UserModel user, string newPassword)
     {
-        var oldPassword = user.Password;
         user.Password = newPassword;
         try
         {
-            _userRepo.Update(_userSecOp.HashUser(user, GetRandomString(10)));
-            _contactDomainOP.UpdateAllContactAfterUpdateKey(user.Username,oldPassword,newPassword);
-            //TODO - what happen if User get Updated but Contacts dont Updated!???
+            _userRepo.Update(_userSecOp.HashAndEncryptUser(user, GetRandomString(10),user.Username + user.Password));
             return true;
         }
         catch (Exception)
