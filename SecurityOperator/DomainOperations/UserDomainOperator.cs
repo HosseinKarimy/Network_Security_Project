@@ -15,12 +15,12 @@ public class UserDomainOperator : IUserDomainOperator
     {
         _userSecOp = new UserSecurityOperator();
         _userRepo = new UserRepository();
-        _contactDomainOP = new ContactDomainOperator();
     }
 
     public bool AddNewUser(UserModel user)
     {   
-        var userDTO = _userSecOp.HashUser(user,GetRandomString(10));
+        user.Key = GetRandomString(10);
+        var userDTO = _userSecOp.HashAndEncryptUser(user, GetRandomString(10), user.Username + user.Password);
         try
         {
             _userRepo.Add(userDTO);
@@ -32,24 +32,12 @@ public class UserDomainOperator : IUserDomainOperator
         }              
     }
 
-    public bool IsValidUser(UserModel user)
-    {
-        try
+    public UserModel? UserValidator(UserModel user)
         {
             var inDbUser = _userRepo.GetByUsername(user.Username);
-            var inputedUser = _userSecOp.HashUser(user, inDbUser.HashedPassword[..10]);
-
-            if (inDbUser.HashedPassword == inputedUser.HashedPassword)
-            {
-                user.ID = inDbUser.ID;
-                return true;
-            }
-            return false;
-        }
-        catch (Exception)
-        {
-            return false;
-        }
+        if (inDbUser == null)
+            return null;
+        return _userSecOp.ValidateUser(user, inDbUser , user.Username + user.Password);
     }
 
     private static string GetRandomString(int length)

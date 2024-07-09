@@ -58,7 +58,7 @@ public class SecurityOperator : ISecurityOperator
     {
         byte[] bytes = Encoding.UTF8.GetBytes(salt + input);
         byte[] hash = SHA256.HashData(bytes);
-        return BitConverter.ToString(hash).Replace("-", "").ToLower();
+        return salt + BitConverter.ToString(hash).Replace("-", "").ToLower();
     }
 
     public bool IsSameSign(string signedText, string checkText, string key)
