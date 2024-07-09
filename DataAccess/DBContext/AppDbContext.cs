@@ -50,6 +50,7 @@ public class AppDbContext
                         ""ID"" INTEGER NOT NULL UNIQUE,
                         ""Username"" TEXT NOT NULL UNIQUE,
                         ""Password"" TEXT NOT NULL,
+                        ""Key""	TEXT NOT NULL,
                         PRIMARY KEY(""ID"" AUTOINCREMENT)
                     );
                 ";

@@ -19,9 +19,10 @@ public class UserRepository : IUserRepository
         using SQLiteConnection connection = new SQLiteConnection(_sqLiteConnection);
         connection.Open();
         using SQLiteCommand cmd = new(connection);
-        cmd.CommandText = "INSERT INTO " + _tableName + " (Username, Password) VALUES (@Username, @Password)";
+        cmd.CommandText = "INSERT INTO " + _tableName + " (Username, Password , Key) VALUES (@Username, @Password , @Key)";
         cmd.Parameters.AddWithValue("@Username", entity.Username);
         cmd.Parameters.AddWithValue("@Password", entity.HashedPassword);
+        cmd.Parameters.AddWithValue("@Key", entity.EncryptedKey);
 
         cmd.ExecuteNonQuery();
     }
@@ -41,7 +42,7 @@ public class UserRepository : IUserRepository
         using SQLiteConnection connection = new SQLiteConnection(_sqLiteConnection);
         connection.Open();
         using SQLiteCommand cmd = new(connection);
-        cmd.CommandText = $"SELECT ID, Username, Password FROM {_tableName} where Username like @Username";
+        cmd.CommandText = $"SELECT ID, Username, Password , Key FROM {_tableName} where Username like @Username";
         cmd.Parameters.AddWithValue("@Username", Username);
 
         using SQLiteDataReader sqlite_datareader = cmd.ExecuteReader();
@@ -53,7 +54,8 @@ public class UserRepository : IUserRepository
             {
                 ID = sqlite_datareader.GetInt32(0),
                 Username = sqlite_datareader.GetString(1),
-                HashedPassword = sqlite_datareader.GetString(2)
+                HashedPassword = sqlite_datareader.GetString(2),
+                EncryptedKey = sqlite_datareader.GetString(3)
             };
         }
 
@@ -65,8 +67,9 @@ public class UserRepository : IUserRepository
         using SQLiteConnection connection = new SQLiteConnection(_sqLiteConnection);
         connection.Open();
         using SQLiteCommand cmd = new(connection);
-        cmd.CommandText = $"UPDATE {_tableName} SET Password = @password WHERE ID = @ID";
+        cmd.CommandText = $"UPDATE {_tableName} SET Password = @password , Key = @key WHERE ID = @ID";
         cmd.Parameters.AddWithValue("@password", entity.HashedPassword);
+        cmd.Parameters.AddWithValue("@key", entity.EncryptedKey);
         cmd.Parameters.AddWithValue("@ID", entity.ID);
 
         cmd.ExecuteNonQuery();
