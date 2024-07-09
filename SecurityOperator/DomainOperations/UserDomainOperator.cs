@@ -1,6 +1,5 @@
 ﻿using DataAccess.Repositories;
 using DataAccess.Repositories.IRepositories;
-using Models.DTO;
 using Models.Models;
 using Operations.SecurityOperations;
 
@@ -10,7 +9,6 @@ public class UserDomainOperator : IUserDomainOperator
 {
     private readonly IUserSecurityOperator _userSecOp;
     private readonly IUserRepository _userRepo;
-    private readonly IContactDomainOperator _contactDomainOP;
     public UserDomainOperator()
     {
         _userSecOp = new UserSecurityOperator();

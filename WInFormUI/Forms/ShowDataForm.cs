@@ -1,9 +1,4 @@
-﻿using DataAccess.Repositories;
-using DataAccess.Repositories.IRepositories;
-using Models;
-using Models.DTO;
-using Models.Models;
-using Operations;
+﻿using Models.Models;
 using Operations.DomainOperations;
 
 namespace WInFormUI
