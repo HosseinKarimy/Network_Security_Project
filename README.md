@@ -1,4 +1,4 @@
-NetWork Security Project
+Network Security Project
 
 Project Name: Safe contacts
 
