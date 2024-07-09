@@ -12,16 +12,18 @@ public class ContactDomainOperator : IContactDomainOperator
     private readonly ISecurityOperator _secOp;
     private readonly IContactSecurityOperator _contactSecOp;
     private readonly IContactRepository _contactRepo;
-    public ContactDomainOperator()
+    private readonly string _masterKey;
+    public ContactDomainOperator(string MasterKey)
     {
         _secOp = new SecurityOperator();
         _contactSecOp = new ContactSecurityOperator();
         _contactRepo = new ContactRepository();
+        _masterKey = MasterKey;
     }
 
-    public bool AddNewContact(ContactModel contact, string key)
+    public bool AddNewContact(ContactModel contact)
     {
-        var contactDto = _contactSecOp.EncrypteContact(contact, key);
+        var contactDto = _contactSecOp.EncrypteContact(contact, _masterKey);
         try
         {
             _contactRepo.Add(contactDto);
@@ -33,9 +35,9 @@ public class ContactDomainOperator : IContactDomainOperator
         }
     }
 
-    public bool DeleteContact(ContactModel contact, string key)
+    public bool DeleteContact(ContactModel contact)
     {
-        var contactDto = _contactSecOp.EncrypteContact(contact, key);
+        var contactDto = _contactSecOp.EncrypteContact(contact, _masterKey);
         try
         {
             _contactRepo.Delete(contactDto);
@@ -47,9 +49,9 @@ public class ContactDomainOperator : IContactDomainOperator
         }
     }
 
-    public bool EditContact(ContactModel contact, string key)
+    public bool EditContact(ContactModel contact)
     {
-        var contactDto = _contactSecOp.EncrypteContact(contact, key);
+        var contactDto = _contactSecOp.EncrypteContact(contact, _masterKey);
         try
         {
             _contactRepo.Update(contactDto);
@@ -61,17 +63,12 @@ public class ContactDomainOperator : IContactDomainOperator
         }
     }
 
-    public List<ContactModel> GetAllContancts(string username, string key)
+    public List<ContactModel> GetAllContancts(string username)
     {
         List<ContactDTO> allContactDTOs = _contactRepo.GetAll();
         List<ContactModel> AllContacts = [];
-        allContactDTOs.ForEach(contactDTO => { AllContacts.Add(_contactSecOp.DecrypteContact(contactDTO, key)); });
+        allContactDTOs.ForEach(contactDTO => { AllContacts.Add(_contactSecOp.DecrypteContact(contactDTO, _masterKey)); });
         return AllContacts.Where(contact => contact.Owner == username).ToList();
     }
 
-    public void UpdateAllContactAfterUpdateKey(string username, string oldKey, string key)
-    {
-        var allcontacts = GetAllContancts(username, oldKey);
-        allcontacts.ForEach(contactModel => { EditContact(contactModel, key); });
-    }
 }
