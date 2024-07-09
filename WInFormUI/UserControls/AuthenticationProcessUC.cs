@@ -91,11 +91,11 @@ namespace WInFormUI
                 Password = TextBox_Password.Text
             };
 
-            var isvalid = _userDomainOperator.IsValidUser(inputUser);
+            var user = _userDomainOperator.UserValidator(inputUser);
 
-            if (isvalid)
+            if (user is not null)
             {
-                UserAuthenticated.Invoke(inputUser, EventArgs.Empty);
+                UserAuthenticated.Invoke(user, EventArgs.Empty);
             } else
             {
                 MessageBox.Show("Username or Password is Invalid");

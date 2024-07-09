@@ -16,7 +16,7 @@ namespace WInFormUI
         {
             InitializeComponent();
             this._user = _user;
-            this._contactDomainOperator = new ContactDomainOperator();
+            this._contactDomainOperator = new ContactDomainOperator(_user.Key);
         }
 
         private void ShowDataForm_Load(object sender, EventArgs e)
@@ -39,7 +39,7 @@ namespace WInFormUI
                 Owner = _user.Username
             };
 
-            var resault = _contactDomainOperator.AddNewContact(newContact, _user.Password);
+            var resault = _contactDomainOperator.AddNewContact(newContact);
             if (resault)
             {
                 ClearForm();
@@ -74,7 +74,7 @@ namespace WInFormUI
                 Owner = _user.Username,
             };
 
-            var resault = _contactDomainOperator.EditContact(editedContact, _user.Password);
+            var resault = _contactDomainOperator.EditContact(editedContact);
             if (resault)
             {
                 ClearForm();
@@ -87,9 +87,15 @@ namespace WInFormUI
 
         private void Button_DeleteContact_Click(object sender, EventArgs e)
         {
-            var selectedItem = ListView_Contacts.SelectedItems[0].Tag as ContactModel;
+            if (ListView_Contacts.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Please select one contact to show details");
+                return;
+            }
 
-            var resault = _contactDomainOperator.DeleteContact(selectedItem, _user.Password);
+            var selectedItem = ListView_Contacts.SelectedItems[0].Tag as ContactModel;
+            
+            var resault = _contactDomainOperator.DeleteContact(selectedItem);
             if (resault)
             {
                 ClearForm();
@@ -111,7 +117,7 @@ namespace WInFormUI
 
         private void LoadDataInList()
         {
-            var contacts = _contactDomainOperator.GetAllContancts(_user.Username, _user.Password);
+            var contacts = _contactDomainOperator.GetAllContancts(_user.Username);
             ListView_Contacts.Clear();
             ListView_Contacts.View = View.Details;
             ListView_Contacts.Columns.Add("Name", 100);
